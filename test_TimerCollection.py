@@ -23,7 +23,7 @@ class TestTimerCollection(unittest.TestCase):
 		# Act
 		time.sleep(1)
 		subject.end_timer("timer 1")
-		print(subject.timers)
+		subject.print_results()
 
 		# Assert
 		self.assertGreater(subject.timers["timer 1"], .9)
@@ -41,7 +41,8 @@ class TestTimerCollection(unittest.TestCase):
 		subject.start_timer("timer 10")
 		time.sleep(2)
 		subject.end_timer("timer 10")
-		print(subject.timers)
+		subject.print_results()
+
 		# Assert
 		self.assertGreater(subject.timers["timer 10"], 2)
 
@@ -51,7 +52,7 @@ class TestTimerCollection(unittest.TestCase):
 		subject = TimerCollection()
 
 		# Act
-		subject.start_timer("timer A")
+		subject.start_timer("timer D")
 		time.sleep(1)
 		subject.start_timer("timer B")
 		time.sleep(1)
@@ -59,12 +60,12 @@ class TestTimerCollection(unittest.TestCase):
 		subject.start_timer("timer C")
 		subject.end_timer("timer C")
 		time.sleep(2)
-		subject.end_timer("timer A")
-		print(subject.timers)
+		subject.end_timer("timer D")
+		subject.print_results()
 
 		# Assert
-		self.assertGreater(subject.timers["timer A"], 3)
-		self.assertGreater(subject.timers["timer A"], 1)
+		self.assertGreaterEqual(subject.timers["timer D"], 3)
+		self.assertGreaterEqual(subject.timers["timer B"], 1)
 
 
 
